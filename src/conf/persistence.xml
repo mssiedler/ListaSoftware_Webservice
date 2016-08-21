@@ -6,18 +6,10 @@
     <class>modelo.Software</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <!-- Desenvolvimento  -->  
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/listaSoftware"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/empresa-software"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="postgres"/>
-    
-      <!-- INTEGRATOR 
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/programa_listaSoftware"/>
-      <property name="javax.persistence.jdbc.user" value="programatche"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="c0l0rad0*12"/>
-     -->
     </properties>
   </persistence-unit>
 </persistence>

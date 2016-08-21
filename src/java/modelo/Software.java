@@ -52,12 +52,12 @@ public class Software implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date verificacao;
     @Size(max = 30)
-    @Column(name = "categoria")
-    private String categoria;
+    @Column(name = "categoria_id")
+    private int categoria_id;
     @Size(max = 90)
     @Column(name = "tema")
     private String tema;
-    @JoinColumn(name = "empresa", referencedColumnName = "id")
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne
     private Empresa empresa;
 
@@ -106,15 +106,16 @@ public class Software implements Serializable {
 
     public void setVerificacao(Date verificacao) {
         this.verificacao = verificacao;
+    } 
+    
+
+    public int getCategoria_id() {
+        return categoria_id;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    public void setCategoria_id(int categoria_id) {
+        this.categoria_id = categoria_id;
+    }    
 
     public String getTema() {
         return tema;
@@ -156,5 +157,4 @@ public class Software implements Serializable {
     public String toString() {
         return "dao.Software[ id=" + id + " ]";
     }
-    
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package service;
 
 import com.google.gson.Gson;
@@ -44,35 +43,33 @@ public class EmpresaWS {
     @GET
     @Produces("application/json")
     @Path("get/{codigo}")
-    public String get(@PathParam("codigo") String codigo)
-    {
+    public String get(@PathParam("codigo") String codigo) {
         Empresa obj = new Empresa();
-        
-        
+
         EmpresaDAO dao;
         try {
             dao = new EmpresaDAO();
             obj = dao.buscarPorChavePrimaria(Integer.parseInt(codigo));
-       
+
         } catch (Exception ex) {
             Logger.getLogger(EmpresaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Converter para Gson
         Gson g = new Gson();
         return g.toJson(obj);
     }
+
     @GET
     @Produces("application/json")
     @Path("list")
-    public String list()
-    {
+    public String list() {
         try {
             List<Empresa> lista;
-            
+
             EmpresaDAO dao = new EmpresaDAO();
             lista = dao.listar();
-            
+
             //Converter para Gson
             Gson g = new Gson();
             return g.toJson(lista);
@@ -81,30 +78,29 @@ public class EmpresaWS {
             return null;
         }
     }
-    
+
     @POST
     @Consumes({"application/json"})
     @Path("insert")
-public boolean insert(String content){
-     Gson g = new Gson();
-    Empresa u = (Empresa) g.fromJson(content, Empresa.class);
-        EmpresaDAO dao;  
+    public boolean insert(String content) {
+        Gson g = new Gson();
+        Empresa u = (Empresa) g.fromJson(content, Empresa.class);
+        EmpresaDAO dao;
         try {
             dao = new EmpresaDAO();
-             dao.incluir(u);
-             dao.fechaEmf();
-             return true;
+            dao.incluir(u);
+            dao.fechaEmf();
+            return true;
         } catch (Exception ex) {
             Logger.getLogger(EmpresaWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
-        
-        
-}
-    
+
+    }
+
     /**
      * PUT method for updating or creating an instance of FazendaWS
+     *
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
@@ -114,7 +110,7 @@ public boolean insert(String content){
     public boolean update(String content) {
         Gson g = new Gson();
         Empresa u = (Empresa) g.fromJson(content, Empresa.class);
-        EmpresaDAO dao;  
+        EmpresaDAO dao;
         try {
             dao = new EmpresaDAO();
             dao.alterar(u);
@@ -124,16 +120,14 @@ public boolean insert(String content){
             Logger.getLogger(EmpresaWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
-    
-   @DELETE
-   @Path("delete/{codigo}")
-    public boolean delete(@PathParam("codigo") String codigo) 
-    {    
+
+    @DELETE
+    @Path("delete/{codigo}")
+    public boolean delete(@PathParam("codigo") String codigo) {
         Empresa u = new Empresa();
-        
-        
+
         EmpresaDAO dao;
         try {
             dao = new EmpresaDAO();
@@ -145,7 +139,7 @@ public boolean insert(String content){
             Logger.getLogger(EmpresaWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
 
 }
