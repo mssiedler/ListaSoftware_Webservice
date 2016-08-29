@@ -106,7 +106,7 @@ public class EmpresaWS {
      */
     @PUT
     @Consumes("application/json")
-    @Path("update")
+    @Path("update/{codigo}")
     public boolean update(String content) {
         Gson g = new Gson();
         Empresa u = (Empresa) g.fromJson(content, Empresa.class);

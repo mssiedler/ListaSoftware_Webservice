@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package service;
 
 import com.google.gson.Gson;
@@ -23,7 +22,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import modelo.Software;
 
-
 /**
  * REST Web Service
  *
@@ -41,14 +39,12 @@ public class SoftwareWS {
     public SoftwareWS() {
     }
 
-   @GET
+    @GET
     @Produces("application/json")
     @Path("get/{codigo}")
-    public String get(@PathParam("codigo") String codigo)
-    {
+    public String get(@PathParam("codigo") String codigo) {
         Software obj = new Software();
-        
-        
+
         SoftwareDAO dao;
         try {
             dao = new SoftwareDAO();
@@ -57,22 +53,22 @@ public class SoftwareWS {
         } catch (Exception ex) {
             Logger.getLogger(SoftwareWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Converter para Gson
         Gson g = new Gson();
         return g.toJson(obj);
     }
+
     @GET
     @Produces("application/json")
     @Path("list")
-    public String list()
-    {
+    public String list() {
         try {
             List<Software> lista;
-            
+
             SoftwareDAO dao = new SoftwareDAO();
             lista = dao.listar();
-            
+
             //Converter para Gson
             Gson g = new Gson();
             return g.toJson(lista);
@@ -81,40 +77,39 @@ public class SoftwareWS {
             return null;
         }
     }
-    
+
     @POST
     @Consumes({"application/json"})
     @Path("insert")
-public boolean insert(String content){
-     Gson g = new Gson();
-    Software u = (Software) g.fromJson(content, Software.class);
-        SoftwareDAO dao;  
+    public boolean insert(String content) {
+        Gson g = new Gson();
+        Software u = (Software) g.fromJson(content, Software.class);
+        SoftwareDAO dao;
         try {
             dao = new SoftwareDAO();
-             dao.incluir(u);
-             dao.fechaEmf();
-             return true;
+            dao.incluir(u);
+            dao.fechaEmf();
+            return true;
         } catch (Exception ex) {
             Logger.getLogger(SoftwareWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
-        
-        
-}
-    
+
+    }
+
     /**
      * PUT method for updating or creating an instance of FazendaWS
+     *
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
     @Consumes("application/json")
-    @Path("update")
+    @Path("update/{codigo}")
     public boolean update(String content) {
         Gson g = new Gson();
         Software u = (Software) g.fromJson(content, Software.class);
-        SoftwareDAO dao;  
+        SoftwareDAO dao;
         try {
             dao = new SoftwareDAO();
             dao.alterar(u);
@@ -124,16 +119,14 @@ public boolean insert(String content){
             Logger.getLogger(SoftwareWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
-    
-   @DELETE
-   @Path("delete/{codigo}")
-    public boolean delete(@PathParam("codigo") String codigo) 
-    {    
+
+    @DELETE
+    @Path("delete/{codigo}")
+    public boolean delete(@PathParam("codigo") String codigo) {
         Software u = new Software();
-        
-        
+
         SoftwareDAO dao;
         try {
             dao = new SoftwareDAO();
@@ -145,7 +138,7 @@ public boolean insert(String content){
             Logger.getLogger(SoftwareWS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
 
 }
